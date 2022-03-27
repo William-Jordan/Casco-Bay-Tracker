@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LocTes {
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\willi\\Documents\\GitHub\\Casco-Bay-Tracker\\src\\test\\resources\\C99\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", ".\\src\\test\\resources\\C99\\chromedriver.exe");
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
         ChromeOptions options = new ChromeOptions();

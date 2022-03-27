@@ -7,8 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Locate {
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\willi\\Documents\\GitHub\\Casco-Bay-Tracker\\src\\main\\resources\\C99\\chromedriver.exe");
+    public static Coordinate[] getLocations(String e, String p) {
+        System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\C99\\chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
@@ -35,11 +35,11 @@ public class Locate {
         //username
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"email\"]")));
         WebElement user = driver.findElement(By.xpath("//*[@id=\"email\"]"));
-        user.sendKeys(args[0]);
+        user.sendKeys(e);
 
         //password
         WebElement pass = driver.findElement(By.xpath("//*[@id=\"password\"]"));
-        pass.sendKeys(args[1]);
+        pass.sendKeys(p);
 
         //remember
         WebElement remember = driver.findElement(By.xpath("//*[@id=\"remembermeCheckbox\"]"));
@@ -58,12 +58,16 @@ public class Locate {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"borderLayout_eGridPanel\"]/div[1]/div/div/div[1]/div[1]/div/div/div/div")));
 
         //get all 5 positions
+        Coordinate[] out = new Coordinate[5];
         for (int i = 0; i < 5; i++) {
             WebElement lat = driver.findElement(By.xpath("//*[@id=\"borderLayout_eGridPanel\"]/div[1]/div/div/div[3]/div[3]/div/div/div["+(i+1)+"]/div[2]/div/div/div"));
             WebElement lon = driver.findElement(By.xpath("//*[@id=\"borderLayout_eGridPanel\"]/div[1]/div/div/div[3]/div[3]/div/div/div["+(i+1)+"]/div[3]/div/div/div"));
-            System.out.println(lat.getText() + " " + lon.getText());
+
+            out[i] = new Coordinate(Double.parseDouble(lat.getText()), Double.parseDouble(lon.getText()));
+//            System.out.println(lat.getText() + " " + lon.getText());
         }
 
         driver.close();
+        return out;
     }
 }
