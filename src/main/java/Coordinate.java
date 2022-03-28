@@ -1,5 +1,5 @@
 public class Coordinate {
-    Double latitude, longitude;
+    private Double latitude, longitude;
 
     public Coordinate(Double latitude, Double longitude) {
         this.latitude = latitude;
@@ -20,6 +20,12 @@ public class Coordinate {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public int[] getPixels(int x, int y, double n, double s, double e, double w){
+        int px = x - (int) Math.round( (longitude-w) / (e-w) * x);
+        int py = y - (int) Math.round( (latitude-s) / (n-s) * y);
+        return new int[]{px, py};
     }
 
     @Override
